@@ -1,0 +1,15 @@
+[project]
+name = "aegisflow"
+version = "0.1.0"
+description = "A local simulation of a real-time risk intelligence and resilience platform."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Ayush Meshram" }
+]
+dependencies = []
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
