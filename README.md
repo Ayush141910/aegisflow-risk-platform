@@ -1,19 +1,17 @@
 # AegisFlow
 
-AegisFlow is a local simulation of a real-time risk intelligence platform. It streams synthetic business events, scores operational risk, explains the top drivers, estimates financial exposure, and recommends mitigation actions from one control-room style dashboard.
+AegisFlow is a local simulation of a real-time risk intelligence platform. It streams synthetic business events, scores operational risk, explains the top drivers, estimates financial exposure, and recommends mitigation actions from a control-room style dashboard.
 
-I built it to explore a question that shows up in a lot of data roles: how do you turn noisy, ambiguous signals into a decision someone can actually use?
+## Overview
 
-## Why This Project
-
-The goal was not to build the biggest possible stack. The goal was to connect four things that are usually discussed separately:
+The project connects four parts of a risk and resilience workflow:
 
 - data engineering reliability
 - machine-learning anomaly detection
 - business impact forecasting
 - decision support for operations and finance
 
-The first version keeps the runtime lightweight so the demo is easy to run, but the design mirrors the same responsibilities a production platform would have: ingest events, validate data quality, score risk, explain the score, and trigger a response.
+The runtime is intentionally lightweight so the demo can run locally without cloud infrastructure. The design still follows the same responsibilities a production system would need: ingest events, validate data quality, score risk, explain the score, and trigger a response.
 
 ## Demo
 
@@ -39,7 +37,7 @@ What to try:
 - click a region on the risk map
 - watch the Aegis Score, pipeline health, driver summary, and mitigation queue change together
 
-## What It Does
+## Capabilities
 
 - Replays transaction, login, infrastructure, finance, and external-event signals.
 - Calculates an Aegis Score from severity, model confidence, financial exposure, impacted services, region, and data quality.
@@ -85,11 +83,11 @@ Start the dashboard:
 python3 -m http.server 8000 --directory app
 ```
 
-## Design Decisions
+## Design Notes
 
-I kept the first model intentionally simple. The harder part of this project was not picking a fancy algorithm; it was making the signal usable: detect risk quickly, explain why it matters, connect it to business impact, and show what action should happen next.
+The initial scoring model is intentionally transparent. In an operational dashboard, the model output needs to be explainable enough for an operator or business partner to understand why a signal changed and what action is recommended.
 
-The current dashboard uses a browser-side event simulator so anyone can run it without Docker, cloud credentials, Kafka, or Spark. The Python package contains the same scoring logic in a testable form, which makes it easier to discuss how the platform would move from demo to production.
+The current dashboard uses a browser-side event simulator so it can run without Docker, cloud credentials, Kafka, or Spark. The Python package contains the same scoring logic in a testable form, which keeps the scoring behavior separate from the UI.
 
 In a production version, the local simulator would become:
 
@@ -100,15 +98,3 @@ In a production version, the local simulator would become:
 - MLflow for experiment tracking and model registry
 - Airflow for scheduled recovery, retraining, and backfill jobs
 - a warehouse or serving store for dashboard queries
-
-## Interview Talking Points
-
-- How I designed the Aegis Score and why it blends severity, confidence, exposure, data quality, and service impact.
-- Why explainability matters more than raw anomaly labels in an operational dashboard.
-- How false positives would affect business partners and how thresholds should be tuned.
-- What I would change when moving from synthetic events to real event streams.
-- How self-healing behavior should be bounded so automation does not hide a real incident.
-
-## Resume Bullet
-
-Built AegisFlow, a real-time risk intelligence platform simulation that streams operational and business events, scores anomaly severity, forecasts financial exposure, validates pipeline health, and recommends mitigation actions through an interactive dashboard.
