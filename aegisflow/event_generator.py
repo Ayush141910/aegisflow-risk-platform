@@ -20,16 +20,23 @@ SERVICES = [
     "data_platform",
 ]
 
+DEFAULT_START = datetime(2026, 1, 15, 14, 0, tzinfo=timezone.utc)
 
-def generate_events(count: int = 240, seed: int = 7) -> list[dict]:
+
+def generate_events(
+    count: int = 240,
+    seed: int = 7,
+    start: datetime = DEFAULT_START,
+    incident_start: int = 130,
+    incident_end: int = 165,
+) -> list[dict]:
     rng = random.Random(seed)
-    start = datetime.now(timezone.utc) - timedelta(hours=4)
     events: list[dict] = []
 
     for index in range(count):
         event_type = rng.choice(EVENT_TYPES)
         region = rng.choice(REGIONS)
-        incident_wave = 130 <= index <= 165
+        incident_wave = incident_start <= index <= incident_end
         severity = rng.betavariate(2, 8)
         confidence = rng.uniform(0.52, 0.88)
         exposure = rng.uniform(4_000, 75_000)
@@ -79,14 +86,18 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate deterministic AegisFlow sample events.")
     parser.add_argument("--count", type=int, default=240)
     parser.add_argument("--seed", type=int, default=7)
+    parser.add_argument("--start", default=DEFAULT_START.isoformat())
+    parser.add_argument("--incident-start", type=int, default=130)
+    parser.add_argument("--incident-end", type=int, default=165)
     parser.add_argument("--out", type=Path, default=Path("data/events.json"))
     args = parser.parse_args()
 
+    start = datetime.fromisoformat(args.start)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(generate_events(args.count, args.seed), indent=2), encoding="utf-8")
+    events = generate_events(args.count, args.seed, start, args.incident_start, args.incident_end)
+    args.out.write_text(json.dumps(events, indent=2), encoding="utf-8")
     print(f"Wrote {args.count} events to {args.out}")
 
 
 if __name__ == "__main__":
     main()
-

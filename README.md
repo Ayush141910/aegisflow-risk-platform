@@ -2,6 +2,8 @@
 
 AegisFlow is a local simulation of a real-time risk intelligence platform. It streams synthetic business events, scores operational risk, explains the top drivers, estimates financial exposure, and recommends mitigation actions from a control-room style dashboard.
 
+![AegisFlow dashboard](screenshots/dashboard.png)
+
 ## Overview
 
 The project connects four parts of a risk and resilience workflow:
@@ -29,6 +31,8 @@ http://localhost:8000
 
 You can also open `app/index.html` directly in a browser.
 
+The root `index.html` redirects to the dashboard so the project can also be served from GitHub Pages.
+
 What to try:
 
 - click `Simulate Incident`
@@ -46,6 +50,12 @@ What to try:
 - Models pipeline health checks for schema quality, stream lag, and model freshness.
 - Recommends mitigation actions such as replay validation, threshold locking, and traffic shifting.
 
+## Example Incident
+
+The dashboard includes a replay flow for an elevated regional incident. A login anomaly can increase the Aegis Score when severity, model confidence, impacted services, data quality drift, and estimated exposure move together.
+
+See [docs/incident-walkthrough.md](docs/incident-walkthrough.md) for the full sequence.
+
 ## Repository Layout
 
 ```text
@@ -61,6 +71,11 @@ tests/
   test_risk_engine.py
 docs/
   architecture.md
+  design-log.md
+  incident-walkthrough.md
+  limitations.md
+data/
+  sample_events.json
 ```
 
 ## Local Commands
@@ -68,7 +83,19 @@ docs/
 Generate deterministic sample events:
 
 ```bash
-python3 -m aegisflow.event_generator --count 240 --out data/events.json
+python3 -m aegisflow.event_generator --count 240 --seed 7 --out data/events.json
+```
+
+Generate a shorter sample with an incident window:
+
+```bash
+python3 -m aegisflow.event_generator --count 32 --seed 17 --incident-start 12 --incident-end 18 --out data/sample_events.json
+```
+
+Inspect the committed sample event set:
+
+```bash
+python3 -m json.tool data/sample_events.json
 ```
 
 Run tests:
@@ -98,3 +125,8 @@ In a production version, the local simulator would become:
 - MLflow for experiment tracking and model registry
 - Airflow for scheduled recovery, retraining, and backfill jobs
 - a warehouse or serving store for dashboard queries
+
+Additional notes:
+
+- [docs/design-log.md](docs/design-log.md)
+- [docs/limitations.md](docs/limitations.md)

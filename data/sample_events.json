@@ -1,0 +1,563 @@
+[
+  {
+    "id": "evt-0001",
+    "timestamp": "2026-01-15T14:00:00+00:00",
+    "event_type": "finance",
+    "region": "GC",
+    "service": "identity",
+    "severity": 0.418,
+    "confidence": 0.774,
+    "financial_exposure": 50958.2,
+    "impacted_services": 1,
+    "data_quality": 0.995,
+    "aegis_score": 64,
+    "severity_band": "elevated",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0002",
+    "timestamp": "2026-01-15T14:01:00+00:00",
+    "event_type": "external",
+    "region": "GC",
+    "service": "identity",
+    "severity": 0.14,
+    "confidence": 0.86,
+    "financial_exposure": 32512.96,
+    "impacted_services": 3,
+    "data_quality": 0.967,
+    "aegis_score": 43,
+    "severity_band": "watch",
+    "drivers": [
+      "Strong model confidence",
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0003",
+    "timestamp": "2026-01-15T14:02:00+00:00",
+    "event_type": "login",
+    "region": "EMEIA",
+    "service": "finance_close",
+    "severity": 0.116,
+    "confidence": 0.667,
+    "financial_exposure": 40017.49,
+    "impacted_services": 2,
+    "data_quality": 0.986,
+    "aegis_score": 35,
+    "severity_band": "low",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0004",
+    "timestamp": "2026-01-15T14:03:00+00:00",
+    "event_type": "login",
+    "region": "GC",
+    "service": "fulfillment",
+    "severity": 0.622,
+    "confidence": 0.539,
+    "financial_exposure": 57394.47,
+    "impacted_services": 2,
+    "data_quality": 0.967,
+    "aegis_score": 60,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0005",
+    "timestamp": "2026-01-15T14:04:00+00:00",
+    "event_type": "infrastructure",
+    "region": "AMR",
+    "service": "finance_close",
+    "severity": 0.217,
+    "confidence": 0.616,
+    "financial_exposure": 59839.35,
+    "impacted_services": 1,
+    "data_quality": 0.99,
+    "aegis_score": 48,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0006",
+    "timestamp": "2026-01-15T14:05:00+00:00",
+    "event_type": "finance",
+    "region": "EMEIA",
+    "service": "payments",
+    "severity": 0.135,
+    "confidence": 0.554,
+    "financial_exposure": 44818.84,
+    "impacted_services": 2,
+    "data_quality": 0.976,
+    "aegis_score": 39,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0007",
+    "timestamp": "2026-01-15T14:06:00+00:00",
+    "event_type": "infrastructure",
+    "region": "AMR",
+    "service": "payments",
+    "severity": 0.168,
+    "confidence": 0.632,
+    "financial_exposure": 9327.12,
+    "impacted_services": 3,
+    "data_quality": 0.995,
+    "aegis_score": 47,
+    "severity_band": "watch",
+    "drivers": [
+      "Low but notable signal"
+    ]
+  },
+  {
+    "id": "evt-0008",
+    "timestamp": "2026-01-15T14:07:00+00:00",
+    "event_type": "finance",
+    "region": "EMEIA",
+    "service": "payments",
+    "severity": 0.183,
+    "confidence": 0.611,
+    "financial_exposure": 14706.91,
+    "impacted_services": 1,
+    "data_quality": 0.995,
+    "aegis_score": 39,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0009",
+    "timestamp": "2026-01-15T14:08:00+00:00",
+    "event_type": "finance",
+    "region": "APAC",
+    "service": "finance_close",
+    "severity": 0.293,
+    "confidence": 0.757,
+    "financial_exposure": 32661.47,
+    "impacted_services": 1,
+    "data_quality": 0.983,
+    "aegis_score": 51,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0010",
+    "timestamp": "2026-01-15T14:09:00+00:00",
+    "event_type": "login",
+    "region": "EMEIA",
+    "service": "identity",
+    "severity": 0.291,
+    "confidence": 0.781,
+    "financial_exposure": 38563.78,
+    "impacted_services": 2,
+    "data_quality": 0.992,
+    "aegis_score": 44,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0011",
+    "timestamp": "2026-01-15T14:10:00+00:00",
+    "event_type": "finance",
+    "region": "GC",
+    "service": "finance_close",
+    "severity": 0.262,
+    "confidence": 0.588,
+    "financial_exposure": 29850.54,
+    "impacted_services": 1,
+    "data_quality": 0.997,
+    "aegis_score": 50,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0012",
+    "timestamp": "2026-01-15T14:11:00+00:00",
+    "event_type": "finance",
+    "region": "GC",
+    "service": "finance_close",
+    "severity": 0.055,
+    "confidence": 0.87,
+    "financial_exposure": 18985.48,
+    "impacted_services": 2,
+    "data_quality": 0.977,
+    "aegis_score": 49,
+    "severity_band": "watch",
+    "drivers": [
+      "Strong model confidence",
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0013",
+    "timestamp": "2026-01-15T14:12:00+00:00",
+    "event_type": "transaction",
+    "region": "AMR",
+    "service": "payments",
+    "severity": 0.753,
+    "confidence": 0.898,
+    "financial_exposure": 250369.61,
+    "impacted_services": 5,
+    "data_quality": 0.927,
+    "aegis_score": 86,
+    "severity_band": "critical",
+    "drivers": [
+      "High anomaly severity",
+      "Strong model confidence",
+      "Meaningful financial exposure",
+      "Multiple services affected",
+      "Data quality drift"
+    ]
+  },
+  {
+    "id": "evt-0014",
+    "timestamp": "2026-01-15T14:13:00+00:00",
+    "event_type": "external",
+    "region": "APAC",
+    "service": "device_activation",
+    "severity": 0.381,
+    "confidence": 0.772,
+    "financial_exposure": 5957.06,
+    "impacted_services": 2,
+    "data_quality": 0.988,
+    "aegis_score": 42,
+    "severity_band": "watch",
+    "drivers": [
+      "Low but notable signal"
+    ]
+  },
+  {
+    "id": "evt-0015",
+    "timestamp": "2026-01-15T14:14:00+00:00",
+    "event_type": "finance",
+    "region": "EMEIA",
+    "service": "fulfillment",
+    "severity": 0.705,
+    "confidence": 0.793,
+    "financial_exposure": 19765.74,
+    "impacted_services": 3,
+    "data_quality": 0.966,
+    "aegis_score": 69,
+    "severity_band": "elevated",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0016",
+    "timestamp": "2026-01-15T14:15:00+00:00",
+    "event_type": "transaction",
+    "region": "GC",
+    "service": "device_activation",
+    "severity": 0.722,
+    "confidence": 0.93,
+    "financial_exposure": 215171.12,
+    "impacted_services": 3,
+    "data_quality": 0.951,
+    "aegis_score": 87,
+    "severity_band": "critical",
+    "drivers": [
+      "Strong model confidence",
+      "Meaningful financial exposure",
+      "Data quality drift"
+    ]
+  },
+  {
+    "id": "evt-0017",
+    "timestamp": "2026-01-15T14:16:00+00:00",
+    "event_type": "infrastructure",
+    "region": "APAC",
+    "service": "finance_close",
+    "severity": 0.883,
+    "confidence": 0.86,
+    "financial_exposure": 172095.04,
+    "impacted_services": 5,
+    "data_quality": 0.918,
+    "aegis_score": 98,
+    "severity_band": "critical",
+    "drivers": [
+      "High anomaly severity",
+      "Strong model confidence",
+      "Meaningful financial exposure",
+      "Multiple services affected",
+      "Data quality drift"
+    ]
+  },
+  {
+    "id": "evt-0018",
+    "timestamp": "2026-01-15T14:17:00+00:00",
+    "event_type": "finance",
+    "region": "EMEIA",
+    "service": "finance_close",
+    "severity": 0.135,
+    "confidence": 0.844,
+    "financial_exposure": 51090.67,
+    "impacted_services": 1,
+    "data_quality": 0.97,
+    "aegis_score": 44,
+    "severity_band": "watch",
+    "drivers": [
+      "Strong model confidence",
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0019",
+    "timestamp": "2026-01-15T14:18:00+00:00",
+    "event_type": "infrastructure",
+    "region": "GC",
+    "service": "identity",
+    "severity": 0.85,
+    "confidence": 0.881,
+    "financial_exposure": 265571.89,
+    "impacted_services": 4,
+    "data_quality": 0.929,
+    "aegis_score": 100,
+    "severity_band": "critical",
+    "drivers": [
+      "High anomaly severity",
+      "Strong model confidence",
+      "Meaningful financial exposure",
+      "Data quality drift"
+    ]
+  },
+  {
+    "id": "evt-0020",
+    "timestamp": "2026-01-15T14:19:00+00:00",
+    "event_type": "external",
+    "region": "APAC",
+    "service": "identity",
+    "severity": 0.179,
+    "confidence": 0.548,
+    "financial_exposure": 10146.95,
+    "impacted_services": 3,
+    "data_quality": 0.977,
+    "aegis_score": 33,
+    "severity_band": "low",
+    "drivers": [
+      "Low but notable signal"
+    ]
+  },
+  {
+    "id": "evt-0021",
+    "timestamp": "2026-01-15T14:20:00+00:00",
+    "event_type": "transaction",
+    "region": "APAC",
+    "service": "device_activation",
+    "severity": 0.041,
+    "confidence": 0.867,
+    "financial_exposure": 56788.27,
+    "impacted_services": 2,
+    "data_quality": 0.978,
+    "aegis_score": 43,
+    "severity_band": "watch",
+    "drivers": [
+      "Strong model confidence",
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0022",
+    "timestamp": "2026-01-15T14:21:00+00:00",
+    "event_type": "finance",
+    "region": "EMEIA",
+    "service": "identity",
+    "severity": 0.139,
+    "confidence": 0.745,
+    "financial_exposure": 67764.12,
+    "impacted_services": 2,
+    "data_quality": 0.973,
+    "aegis_score": 44,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0023",
+    "timestamp": "2026-01-15T14:22:00+00:00",
+    "event_type": "finance",
+    "region": "APAC",
+    "service": "finance_close",
+    "severity": 0.135,
+    "confidence": 0.593,
+    "financial_exposure": 26425.52,
+    "impacted_services": 1,
+    "data_quality": 0.994,
+    "aegis_score": 40,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0024",
+    "timestamp": "2026-01-15T14:23:00+00:00",
+    "event_type": "transaction",
+    "region": "APAC",
+    "service": "identity",
+    "severity": 0.292,
+    "confidence": 0.629,
+    "financial_exposure": 67404.77,
+    "impacted_services": 1,
+    "data_quality": 0.99,
+    "aegis_score": 47,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0025",
+    "timestamp": "2026-01-15T14:24:00+00:00",
+    "event_type": "login",
+    "region": "EMEIA",
+    "service": "identity",
+    "severity": 0.356,
+    "confidence": 0.795,
+    "financial_exposure": 63784.59,
+    "impacted_services": 1,
+    "data_quality": 0.98,
+    "aegis_score": 46,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0026",
+    "timestamp": "2026-01-15T14:25:00+00:00",
+    "event_type": "infrastructure",
+    "region": "EMEIA",
+    "service": "device_activation",
+    "severity": 0.262,
+    "confidence": 0.796,
+    "financial_exposure": 20169.5,
+    "impacted_services": 2,
+    "data_quality": 0.977,
+    "aegis_score": 51,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0027",
+    "timestamp": "2026-01-15T14:26:00+00:00",
+    "event_type": "login",
+    "region": "APAC",
+    "service": "device_activation",
+    "severity": 0.365,
+    "confidence": 0.592,
+    "financial_exposure": 22216.9,
+    "impacted_services": 1,
+    "data_quality": 0.993,
+    "aegis_score": 43,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0028",
+    "timestamp": "2026-01-15T14:27:00+00:00",
+    "event_type": "external",
+    "region": "AMR",
+    "service": "payments",
+    "severity": 0.054,
+    "confidence": 0.632,
+    "financial_exposure": 30867.93,
+    "impacted_services": 2,
+    "data_quality": 0.992,
+    "aegis_score": 31,
+    "severity_band": "low",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0029",
+    "timestamp": "2026-01-15T14:28:00+00:00",
+    "event_type": "transaction",
+    "region": "APAC",
+    "service": "payments",
+    "severity": 0.178,
+    "confidence": 0.742,
+    "financial_exposure": 67947.34,
+    "impacted_services": 1,
+    "data_quality": 0.99,
+    "aegis_score": 45,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0030",
+    "timestamp": "2026-01-15T14:29:00+00:00",
+    "event_type": "transaction",
+    "region": "APAC",
+    "service": "payments",
+    "severity": 0.114,
+    "confidence": 0.652,
+    "financial_exposure": 19600.29,
+    "impacted_services": 3,
+    "data_quality": 0.992,
+    "aegis_score": 41,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0031",
+    "timestamp": "2026-01-15T14:30:00+00:00",
+    "event_type": "infrastructure",
+    "region": "EMEIA",
+    "service": "fulfillment",
+    "severity": 0.184,
+    "confidence": 0.764,
+    "financial_exposure": 36729.28,
+    "impacted_services": 3,
+    "data_quality": 0.971,
+    "aegis_score": 49,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  },
+  {
+    "id": "evt-0032",
+    "timestamp": "2026-01-15T14:31:00+00:00",
+    "event_type": "transaction",
+    "region": "APAC",
+    "service": "device_activation",
+    "severity": 0.018,
+    "confidence": 0.599,
+    "financial_exposure": 60074.96,
+    "impacted_services": 2,
+    "data_quality": 0.975,
+    "aegis_score": 36,
+    "severity_band": "watch",
+    "drivers": [
+      "Meaningful financial exposure"
+    ]
+  }
+]
