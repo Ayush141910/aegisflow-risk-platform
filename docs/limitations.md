@@ -5,8 +5,9 @@ AegisFlow is a simulation, not a production streaming platform. The current vers
 ## Current Boundaries
 
 - Events are synthetic and generated from fixed distributions.
-- The dashboard simulates streaming in the browser.
+- The dashboard can run as a static simulator or connect to the local API.
 - The Aegis Score is heuristic and transparent, not a trained predictive model.
+- The anomaly detector uses a local baseline, not production incident labels.
 - Financial exposure is estimated from event fields rather than downstream accounting systems.
 - Pipeline health checks are modeled as lightweight validation logic.
 - Mitigation actions are recommendations, not automated infrastructure changes.
@@ -21,4 +22,3 @@ AegisFlow is a simulation, not a production streaming platform. The current vers
 - Require approval boundaries for high-impact automated actions.
 
 These limits are deliberate for the public version of the project. They keep the demo reproducible while leaving a clear path toward a larger implementation.
-

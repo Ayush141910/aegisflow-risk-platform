@@ -4,14 +4,15 @@
 
 ```mermaid
 flowchart LR
-  A["Synthetic event sources"] --> B["Streaming ingest"]
-  B --> C["Validation checks"]
-  C --> D["Feature windows"]
-  D --> E["Risk scoring"]
-  E --> F["Impact forecast"]
-  F --> G["Dashboard and mitigation queue"]
-  C --> H["Self-healing actions"]
-  H --> B
+  A["Synthetic event generator"] --> B["Validation checks"]
+  B --> C["Feature extraction"]
+  C --> D["Anomaly detector"]
+  D --> E["Aegis risk engine"]
+  E --> F["FastAPI service"]
+  F --> G["Dashboard"]
+  F --> H["Incident replay"]
+  B --> I["Pipeline health"]
+  I --> G
 ```
 
 ## Event Families
@@ -39,6 +40,20 @@ Inputs:
 
 The current formula is intentionally transparent so it can be explained in an interview. A production system could replace pieces of it with learned weights, calibrated probabilities, or a rules-plus-model hybrid.
 
+## Local Pipeline
+
+The local pipeline is split into modules:
+
+- `event_generator.py`: creates deterministic event streams and incident windows
+- `pipeline_health.py`: validates batch quality and recommends recovery actions
+- `features.py`: converts raw events into model-ready numerical features
+- `anomaly_model.py`: scores events against a learned local baseline
+- `risk_engine.py`: calculates the Aegis Score and explanation drivers
+- `pipeline.py`: orchestrates validation, anomaly detection, and scoring
+- `api.py`: exposes the pipeline through FastAPI endpoints
+
+This keeps the dashboard separate from the data and scoring logic. The browser can run in static demo mode, while the full local mode runs through the API.
+
 ## Self-Healing Boundaries
 
 The platform recommends recovery actions, but it does not silently erase failures. That boundary matters. If data quality drops, the system should quarantine or replay data and make the degraded state visible. It should not hide uncertainty behind a clean-looking dashboard.
@@ -57,7 +72,7 @@ The lightweight demo can evolve into a larger data platform without changing the
 
 ```text
 browser simulator  ->  Kafka / Redpanda producers
-local score logic   ->  Spark Structured Streaming job
+local pipeline      ->  Spark Structured Streaming job
 JSON event history  ->  Delta Lake / Iceberg table
 inline checks       ->  Great Expectations suites
 manual simulation   ->  Airflow recovery DAGs
@@ -65,4 +80,3 @@ dashboard state     ->  warehouse-backed API
 ```
 
 The important part is the contract between stages: every event should have enough context to explain why it was scored, what it may cost, and what action is recommended.
-

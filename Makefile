@@ -1,7 +1,10 @@
-.PHONY: demo events sample-events test
+.PHONY: demo api events sample-events test
 
 demo:
 	python3 -m http.server 8000 --directory app
+
+api:
+	uvicorn aegisflow.api:app --reload
 
 events:
 	python3 -m aegisflow.event_generator --count 240 --out data/events.json

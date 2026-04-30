@@ -5,6 +5,7 @@ const services = ["payments", "identity", "device activation", "fulfillment", "f
 const state = {
   paused: false,
   replay: false,
+  apiConnected: false,
   tick: 0,
   events: [],
   scores: Array.from({ length: 52 }, () => 18 + Math.round(Math.random() * 8)),
@@ -80,6 +81,17 @@ function driversFor(event) {
   return drivers.length ? drivers : [["Low but notable signal", "The event is below threshold but worth tracking."]];
 }
 
+function driverText(driver) {
+  return {
+    "High anomaly severity": "Signal pattern moved sharply from baseline.",
+    "Strong model confidence": "The detector has enough recent context to act.",
+    "Meaningful financial exposure": "Forecasted loss is high enough to prioritize.",
+    "Multiple services affected": "Impact is no longer isolated to one workflow.",
+    "Data quality drift": "Validation checks found a reliability drop.",
+    "Low but notable signal": "The event is below threshold but worth tracking.",
+  }[driver] || "This factor contributed to the current risk score.";
+}
+
 function createEvent(forceIncident = false) {
   const incident = forceIncident || Math.random() > 0.82;
   const type = incident
@@ -106,6 +118,24 @@ function createEvent(forceIncident = false) {
   event.band = band(event.score);
   event.drivers = driversFor(event);
   return event;
+}
+
+function fromApiEvent(event) {
+  const drivers = (event.drivers || []).map((driver) => [driver, driverText(driver)]);
+  return {
+    time: new Date(event.timestamp),
+    type: event.event_type,
+    region: event.region,
+    service: String(event.service || "").replaceAll("_", " "),
+    severity: event.severity,
+    confidence: event.confidence,
+    exposure: event.financial_exposure,
+    impacted: event.impacted_services,
+    quality: event.data_quality,
+    score: event.aegis_score,
+    band: event.severity_band,
+    drivers: drivers.length ? drivers : [["Low but notable signal", driverText("Low but notable signal")]],
+  };
 }
 
 function portfolio() {
@@ -201,6 +231,32 @@ function updateMap() {
     node.querySelector("span").textContent = score;
     node.classList.toggle("hot", score >= 62);
   });
+}
+
+function hydrateFromApi(summary) {
+  const apiEvents = (summary.events || []).map(fromApiEvent);
+  state.apiConnected = true;
+  state.events = apiEvents.slice().reverse();
+  state.scores = apiEvents.map((event) => event.score).slice(-52);
+  state.regionRisk = regions.reduce((risk, region) => {
+    const regionEvents = apiEvents.filter((event) => event.region === region);
+    risk[region] = regionEvents.length
+      ? Math.round(regionEvents.reduce((sum, event) => sum + event.score, 0) / regionEvents.length)
+      : 16;
+    return risk;
+  }, {});
+  elements.streamStatus.textContent = "API Mode";
+  elements.streamStatus.classList.remove("paused");
+  render();
+}
+
+async function loadApiSummary(path = "/api/summary", options = {}) {
+  const response = await fetch(path, {
+    headers: { "Accept": "application/json" },
+    ...options,
+  });
+  if (!response.ok) throw new Error(`API request failed: ${response.status}`);
+  hydrateFromApi(await response.json());
 }
 
 function updateLists(model) {
@@ -309,7 +365,13 @@ function setPaused(paused) {
 }
 
 elements.pauseStream.addEventListener("click", () => setPaused(!state.paused));
-elements.injectIncident.addEventListener("click", () => ingest(true));
+elements.injectIncident.addEventListener("click", () => {
+  if (state.apiConnected) {
+    loadApiSummary("/api/incidents/replay", { method: "POST" }).catch(() => ingest(true));
+  } else {
+    ingest(true);
+  }
+});
 elements.liveMode.addEventListener("click", () => {
   state.replay = false;
   elements.liveMode.classList.add("selected");
@@ -330,7 +392,9 @@ document.querySelectorAll(".region").forEach((node) => {
 });
 
 for (let index = 0; index < 10; index += 1) ingest(index === 7);
+loadApiSummary().catch(() => {
+  state.apiConnected = false;
+});
 setInterval(() => {
-  if (!state.paused) ingest(state.replay && state.tick++ % 7 === 0);
+  if (!state.paused && !state.apiConnected) ingest(state.replay && state.tick++ % 7 === 0);
 }, 1800);
-
