@@ -1,18 +1,39 @@
 # AegisFlow
 
+[![CI](https://github.com/Ayush141910/aegisflow-risk-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/Ayush141910/aegisflow-risk-platform/actions/workflows/ci.yml)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2563EB)](https://ayush141910.github.io/aegisflow-risk-platform/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)](docs/api.md)
+
 AegisFlow is a local simulation of a real-time risk intelligence platform. It streams synthetic business events, scores operational risk, explains the top drivers, estimates financial exposure, and recommends mitigation actions from a control-room style dashboard.
 
 ![AegisFlow dashboard](screenshots/dashboard.png)
 
+## Why This Project Exists
+
+Operational dashboards often stop at alerts. AegisFlow goes one step further: it turns noisy signals into a decision brief that explains what changed, why it matters, what the estimated exposure is, and what action an operator should consider next.
+
+This project is built to show the product thinking behind an ML-backed data system:
+
+- explainable scoring instead of mystery anomaly labels
+- data quality and pipeline health as first-class signals
+- financial exposure as business context
+- incident replay for repeatable analysis
+- a clear path from local simulation to production data infrastructure
+
 ## Live Demo
 
-Dashboard:
-
-```text
-https://ayush141910.github.io/aegisflow-risk-platform/
-```
+Dashboard: [https://ayush141910.github.io/aegisflow-risk-platform/](https://ayush141910.github.io/aegisflow-risk-platform/)
 
 The hosted demo runs as a static dashboard. The full local mode adds the FastAPI backend, anomaly detector, validation checks, and incident replay API.
+
+## What Reviewers Can Inspect Quickly
+
+- **Dashboard:** event replay, regional risk map, Aegis Score, pipeline health, driver summary, mitigation queue
+- **Backend:** FastAPI endpoints for events, scores, anomalies, health checks, decision brief, and incident replay
+- **ML logic:** local anomaly detector, feature extraction, transparent risk scoring
+- **Reliability:** unit tests, GitHub Actions CI, deterministic sample data
+- **Documentation:** architecture, API reference, incident walkthrough, limitations, and design log
 
 ## Overview
 
@@ -24,6 +45,7 @@ The project connects six parts of a risk and resilience workflow:
 - business impact forecasting
 - backend API serving
 - decision support for operations and finance
+- executive decision briefing
 
 The runtime is intentionally lightweight so the demo can run without cloud infrastructure. The design still follows the same responsibilities a production system would need: ingest events, validate data quality, extract features, detect anomalies, score risk, explain the score, and trigger a response.
 
@@ -38,6 +60,7 @@ flowchart LR
   E --> F["FastAPI service"]
   F --> G["Dashboard"]
   F --> H["Incident replay"]
+  F --> I["Decision brief"]
 ```
 
 ## Demo
@@ -84,6 +107,7 @@ What to try:
 - pause and resume the stream
 - click a region on the risk map
 - watch the Aegis Score, pipeline health, driver summary, and mitigation queue change together
+- call `/api/brief` to see the operator-facing decision summary
 
 ## Capabilities
 
@@ -95,6 +119,7 @@ What to try:
 - Estimates financial exposure so the alert has business context.
 - Models pipeline health checks for schema quality, stream lag, and model freshness.
 - Exposes events, scores, health checks, anomalies, and incident replay through FastAPI.
+- Produces an operator-friendly decision brief with evidence, watch items, and recommended actions.
 - Recommends mitigation actions such as replay validation, threshold locking, and traffic shifting.
 
 ## Example Incident
@@ -117,6 +142,7 @@ aegisflow/
   features.py       Feature extraction
   pipeline.py       Pipeline orchestration
   pipeline_health.py
+  decision_brief.py Operator-facing decision summary
   risk_engine.py    Aegis Score implementation
 tests/
   test_risk_engine.py
@@ -174,11 +200,17 @@ Call the pipeline summary:
 curl http://localhost:8000/api/summary
 ```
 
+Call the decision brief:
+
+```bash
+curl http://localhost:8000/api/brief
+```
+
 ## Design Notes
 
 The initial scoring model is intentionally transparent. In an operational dashboard, the model output needs to be explainable enough for an operator or business partner to understand why a signal changed and what action is recommended.
 
-The dashboard can run in static mode with a browser-side event simulator, or in full local mode against the FastAPI pipeline. The Python package keeps scoring, validation, feature extraction, and anomaly detection separate from the UI.
+The dashboard can run in static mode with a browser-side event simulator, or in full local mode against the FastAPI pipeline. The Python package keeps scoring, validation, feature extraction, anomaly detection, and decision briefing separate from the UI.
 
 In a production version, the local simulator would become:
 
@@ -195,3 +227,4 @@ Additional notes:
 - [docs/api.md](docs/api.md)
 - [docs/design-log.md](docs/design-log.md)
 - [docs/limitations.md](docs/limitations.md)
+- [docs/linkedin-post.md](docs/linkedin-post.md)

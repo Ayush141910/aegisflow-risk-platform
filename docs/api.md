@@ -48,6 +48,26 @@ Example response shape:
 }
 ```
 
+### `GET /api/brief`
+
+Returns an operator-friendly decision brief generated from the pipeline summary. This endpoint translates the score, evidence, health checks, anomaly flags, and highest-risk events into recommended next actions.
+
+Example response shape:
+
+```json
+{
+  "headline": "Elevated risk state: monitor top drivers and prepare mitigation.",
+  "risk_level": "elevated",
+  "portfolio_score": 78,
+  "estimated_loss": 214000.0,
+  "primary_region": "AMR",
+  "primary_signal": "login",
+  "evidence": [],
+  "recommended_actions": [],
+  "watch_items": []
+}
+```
+
 ### `GET /api/score`
 
 Returns the current portfolio-level Aegis Score.
@@ -69,4 +89,3 @@ Scores a single event payload.
 Generates a deterministic incident replay and returns the pipeline summary.
 
 This endpoint is used by the dashboard when the API is running locally.
-

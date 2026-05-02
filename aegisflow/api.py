@@ -7,6 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from .decision_brief import build_decision_brief
 from .event_generator import generate_events
 from .pipeline import SAMPLE_PATH, replay_incident, score_event_payload, summarize_events
 
@@ -59,6 +60,11 @@ def get_summary() -> dict:
     return summarize_events(_load_sample_events())
 
 
+@app.get("/api/brief")
+def get_decision_brief() -> dict:
+    return build_decision_brief(summarize_events(_load_sample_events()))
+
+
 @app.post("/api/events/score")
 def post_score_event(event: dict) -> dict:
     return score_event_payload(event)
@@ -79,6 +85,7 @@ def root() -> dict:
             "/api/health",
             "/api/anomalies",
             "/api/summary",
+            "/api/brief",
             "/api/incidents/replay",
         ],
     }

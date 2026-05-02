@@ -23,6 +23,14 @@ class ApiTest(unittest.TestCase):
         self.assertIn("portfolio", body)
         self.assertIn("events", body)
 
+    def test_decision_brief_endpoint(self):
+        response = self.client.get("/api/brief")
+
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertIn("headline", body)
+        self.assertIn("recommended_actions", body)
+
     def test_replay_endpoint(self):
         response = self.client.post("/api/incidents/replay")
 

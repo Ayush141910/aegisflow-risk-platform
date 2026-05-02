@@ -1,5 +1,6 @@
 import unittest
 
+from aegisflow.decision_brief import build_decision_brief
 from aegisflow.event_generator import generate_events
 from aegisflow.pipeline import score_event_payload, summarize_events
 
@@ -23,7 +24,16 @@ class PipelineTest(unittest.TestCase):
         self.assertIn("score", scored)
         self.assertIn("drivers", scored)
 
+    def test_decision_brief_contains_actions_and_evidence(self):
+        events = generate_events(count=32, seed=17, incident_start=12, incident_end=18)
+
+        brief = build_decision_brief(summarize_events(events))
+
+        self.assertIn("headline", brief)
+        self.assertIn("recommended_actions", brief)
+        self.assertIn("evidence", brief)
+        self.assertGreater(len(brief["recommended_actions"]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
-

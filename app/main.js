@@ -26,6 +26,10 @@ const elements = {
   healthList: document.querySelector("#healthList"),
   driverList: document.querySelector("#driverList"),
   actionList: document.querySelector("#actionList"),
+  briefActions: document.querySelector("#briefActions"),
+  briefEvidence: document.querySelector("#briefEvidence"),
+  briefHeadline: document.querySelector("#briefHeadline"),
+  briefRiskLevel: document.querySelector("#briefRiskLevel"),
   eventRows: document.querySelector("#eventRows"),
   pauseStream: document.querySelector("#pauseStream"),
   injectIncident: document.querySelector("#injectIncident"),
@@ -319,6 +323,47 @@ function updateLists(model) {
   `).join("");
 }
 
+function updateDecisionBrief(model) {
+  const topEvent = model.topEvent;
+  const riskLevel = band(model.score);
+  const headline = model.score >= 82
+    ? "Critical risk state: immediate operator review recommended."
+    : model.score >= 62
+      ? "Elevated risk state: monitor top drivers and prepare mitigation."
+      : model.score >= 36
+        ? "Watch state: signals are rising but remain below escalation threshold."
+        : "Low risk state: no immediate escalation recommended.";
+  const evidence = [
+    `Portfolio Aegis Score is ${model.score} with ${riskLevel} severity.`,
+    `Estimated financial exposure is ${money(model.exposure)}.`,
+    `Highest-risk signal is ${topEvent.type} in ${topEvent.region} with score ${topEvent.score}.`,
+    `Primary driver: ${topEvent.drivers[0][0].toLowerCase()}.`,
+  ];
+  const actions = model.score >= 82
+    ? [
+        "Open an incident review and freeze automated threshold changes.",
+        "Validate the highest-exposure events before mitigation is automated.",
+        "Notify service and finance owners with the driver summary.",
+      ]
+    : model.score >= 62
+      ? [
+          "Monitor the top event drivers and prepare a mitigation plan.",
+          "Compare anomaly flags against recent baseline behavior.",
+          "Review pipeline health before trusting downstream automation.",
+        ]
+      : [
+          "Continue monitoring and keep the current thresholds active.",
+          "Refresh the baseline after the replay window closes.",
+          "Review watchlist events during the next triage pass.",
+        ];
+
+  elements.briefHeadline.textContent = headline;
+  elements.briefRiskLevel.textContent = riskLevel[0].toUpperCase() + riskLevel.slice(1);
+  elements.briefRiskLevel.classList.toggle("paused", model.score < 62);
+  elements.briefEvidence.innerHTML = evidence.map((item) => `<span>${item}</span>`).join("");
+  elements.briefActions.innerHTML = actions.map((item) => `<span>${item}</span>`).join("");
+}
+
 function updateEvents() {
   const rows = state.events.slice(0, 8).map((event) => {
     const time = event.time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -339,6 +384,7 @@ function render() {
   const model = portfolio();
   updateSummary(model);
   updateMap();
+  updateDecisionBrief(model);
   updateLists(model);
   updateEvents();
   drawChart();

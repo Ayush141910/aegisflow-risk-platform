@@ -261,6 +261,38 @@ button {
   padding: 18px;
 }
 
+.decision-brief-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.brief-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.brief-grid strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.brief-list {
+  display: grid;
+  gap: 8px;
+}
+
+.brief-list span {
+  display: block;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fbfcfc;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.42;
+}
+
 .panel-header {
   display: flex;
   align-items: flex-start;
@@ -472,7 +504,8 @@ button {
 
   .score-band,
   .two-column,
-  .three-column {
+  .three-column,
+  .brief-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -528,4 +561,3 @@ button {
     display: none;
   }
 }
-

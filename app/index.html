@@ -19,6 +19,7 @@
 
         <nav class="nav-list" aria-label="Primary">
           <a class="active" href="#overview">Overview</a>
+          <a href="#brief">Brief</a>
           <a href="#signals">Signals</a>
           <a href="#pipeline">Pipeline</a>
           <a href="#actions">Actions</a>
@@ -67,6 +68,26 @@
           <div class="metric">
             <span>Data Quality</span>
             <strong id="qualityScore">98.4%</strong>
+          </div>
+        </section>
+
+        <section class="panel decision-brief-panel" id="brief" aria-label="Decision brief">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Executive decision brief</p>
+              <h2 id="briefHeadline">Watch state: signals are rising but remain contained.</h2>
+            </div>
+            <span class="status-pill" id="briefRiskLevel">Watch</span>
+          </div>
+          <div class="brief-grid">
+            <div>
+              <strong>Evidence</strong>
+              <div class="brief-list" id="briefEvidence"></div>
+            </div>
+            <div>
+              <strong>Recommended actions</strong>
+              <div class="brief-list" id="briefActions"></div>
+            </div>
           </div>
         </section>
 
@@ -158,4 +179,3 @@
     <script src="./main.js"></script>
   </body>
 </html>
-
